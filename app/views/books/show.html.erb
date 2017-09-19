@@ -1,4 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<!-- <%= link_to 'Edit', edit_book_path(@book) %> | -->
+<p>
+  <%=@book.title %>
+  <br>
+  <%=@book.author %>
+  <br>
+  <%=@book.description %>
+  <br>
+  <%=@book.URL %>
+</p>
+
+
+<%= link_to 'Edit', edit_book_path(@book) %>
+<br>
+<%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'Are you sure?' } %>
+<br>
+<%= link_to 'New Book', new_book_path %>
+<br>
 <%= link_to 'Back', books_path %>
