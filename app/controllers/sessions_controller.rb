@@ -7,7 +7,9 @@ class SessionsController < ApplicationController
     user = User.find_by(username: params[:username])
     if user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_url
+      redirect_to books_path
     end
   end
+
+  
 end

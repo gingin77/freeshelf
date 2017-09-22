@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     if user_signed_in? != true
-      redirect_to sign_in_path
+      redirect_to books_path
     end
   end
 
