@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :require_login, only: [:show, :edit, :update, :new, :destroy]
+  before_action :book_owner, only: [:edit, :update, :destroy]
 
 
   def index
@@ -70,5 +71,10 @@ class BooksController < ApplicationController
 
     def book_params
       params.require(:book).permit(:id, :title, :author, :description, :URL)
+    end
+
+    def book_owner
+      set_book
+      redirect_to books_path unless @book.user_id == current_user.id
     end
 end
