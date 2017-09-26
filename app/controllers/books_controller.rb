@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :edit, :update, :new, :destroy]
+  before_action :require_login, only: [:show, :edit, :update, :new, :destroy]
 
   def index
     @books = Book.all
@@ -55,6 +55,10 @@ class BooksController < ApplicationController
   # end
 
   private
+    def require_login
+      redirect_to login_path unless logged_in?
+    end
+
     def set_book
       @book = Book.find(params[:id])
     end
