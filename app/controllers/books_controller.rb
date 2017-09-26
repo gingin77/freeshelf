@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   before_action :require_login, only: [:show, :edit, :update, :new, :destroy]
 
+
   def index
     @books = Book.all
   end
@@ -17,17 +18,20 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new(book_params)
-
-    respond_to do |format|
-      if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.json { render :show, status: :created, location: @book }
-      else
-        format.html { render :new }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
-    end
+    @user = User.find_by(id: session[:user_id])
+    @book = @user.books.create(book_params)
+    redirect_to books_path(@book)
+    # @book = Book.new(book_params)
+    #
+    # respond_to do |format|
+    #   if @book.save
+    #     format.html { redirect_to @book, notice: 'Book was successfully created.' }
+    #     format.json { render :show, status: :created, location: @book }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @book.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   def update
@@ -43,7 +47,6 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book.destroy
     respond_to do |format|
       format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
       format.json { head :no_content }
