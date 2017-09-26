@@ -2,6 +2,13 @@
 
 <h1>Books</h1>
 
+<% if logged_in? %>
+  <p><%= link_to "Users", '#' %></p>
+  <p><%= link_to "Log out", logout_path, method: :delete %></p>
+<% else %>
+  <p><%= link_to "Log in", login_path %></p>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -14,6 +21,7 @@
       <tr>
         <td><%=book.title        %></td>
         <td><%=book.author        %></td>
+        <!-- <td><%= link_to book.author, author_books %></td> -->
         <td><%=book.description        %></td>
         <td><%=book.URL        %></td>
         <td><%= link_to 'Show', book %></td>

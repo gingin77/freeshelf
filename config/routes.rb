@@ -8,3 +8,14 @@ Rails.application.routes.draw do
 
   root 'books#index'
 end
+
+#
+# Rails.application.routes.draw do
+#   resources :books do
+#     collection do
+#       get "genres/:genre", action: :genre, as: :genre
+#     end
+#   end
+# end
+#
+# get "/books/genres/:genre", controller: :books, action: :genre, as: :genre

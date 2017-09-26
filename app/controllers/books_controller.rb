@@ -50,12 +50,16 @@ class BooksController < ApplicationController
     end
   end
 
-private
-  def set_book
-    @book = Book.find(params[:id])
-  end
+  # def genre
+  #   @books = Book.where(genre: params[:genres])
+  # end
 
-  def book_params
-    params.require(:book).permit(:id, :title, :author, :description, :URL)
-  end
+  private
+    def set_book
+      @book = Book.find(params[:id])
+    end
+
+    def book_params
+      params.require(:book).permit(:id, :title, :author, :description, :URL)
+    end
 end
