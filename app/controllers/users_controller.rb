@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  # before_action :require_login, only: [:show]
+
   def show
     @user = User.find(params[:id])
   end
@@ -20,6 +22,11 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def is_user?
+
+      redirect_to books_path unless @user.id == current_user.id
     end
 end
 
